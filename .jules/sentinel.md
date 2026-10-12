@@ -1,0 +1,4 @@
+## 2024-05-15 - Missing Input Validation in GUI Click Events
+**Vulnerability:** Mouse click events could be simulated or occur outside the main canvas area (e.g. padding/margins), producing logical grid coordinates (like 5, 5) which are outside the bounds of the 3x3 array used for board state (`self.board_status`). When accessed without validation, this crashes the application (`IndexError`).
+**Learning:** Even input derived from GUI events (like mouse clicks mapping to screen coordinates) must be treated as untrusted and validated against logical bounds before acting upon it, since users can interact with UI elements unpredictably.
+**Prevention:** Always ensure arrays and grids only receive accesses for indices that have been explicitly bounds-checked when the index is derived from an external input event (like `event.x` and `event.y`).
