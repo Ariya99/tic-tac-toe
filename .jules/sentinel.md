@@ -1,0 +1,4 @@
+## 2025-02-12 - GUI Input Validation Gap Leads to Out-of-Bounds Access
+**Vulnerability:** The application lacked input validation on raw mouse click coordinates before mapping them to array indices, leading to out-of-bounds array access (crashing the application on large coordinates) and logic corruption (Python's negative indexing allowing modification of opposite board corners).
+**Learning:** Even in local GUI applications, untrusted user input (like raw mouse click coordinates) must be validated before being used as an index for internal data structures. Python's negative indexing feature can mask out-of-bounds errors by turning them into silent state corruption instead of crashes.
+**Prevention:** Always validate derived indices against the strict bounds of the data structure (e.g., `0 <= index < size`) before accessing or modifying array elements.
