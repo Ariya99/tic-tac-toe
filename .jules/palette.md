@@ -1,0 +1,3 @@
+## 2026-10-15 - Turn Indicators in Local Multiplayer
+**Learning:** In local multiplayer desktop applications, users frequently lose track of whose turn it is without constant, obvious visual feedback. Relying solely on the symbol being drawn is insufficient.
+**Action:** Always include a persistent, highly visible turn indicator (e.g., in the window title or a dedicated UI element) that updates dynamically after each move.
