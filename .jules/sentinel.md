@@ -1,0 +1,4 @@
+## 2026-10-16 - Out-of-bounds Array Access Vulnerability
+**Vulnerability:** The application takes user-provided screen coordinates from click events and directly maps them to logical array coordinates without any bounds checking. Clicking outside the primary bounding box leads to an `IndexError` due to out-of-bounds index access, causing application crashes.
+**Learning:** External user events and interface interactions cannot be trusted to be within expected bounds, even for purely visual applications. Input mapping directly into an unverified array index enables untrusted data to disrupt service stability.
+**Prevention:** Implement strict input validation to verify bounds mapping before array indexing. Validate that `logical_position` indices remain within the defined matrix size (e.g., `0 <= x < 3`).
