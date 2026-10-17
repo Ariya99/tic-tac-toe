@@ -148,13 +148,9 @@ class Tic_Tac_Toe():
         return False
 
     def is_tie(self):
-
-        r, c = np.where(self.board_status == 0)
-        tie = False
-        if len(r) == 0:
-            tie = True
-
-        return tie
+        # ⚡ BOLT: Replace slow np.where() with fast C-level .all() check for zeros
+        # board_status contains 1, -1, or 0. .all() is False if any 0s exist
+        return bool(self.board_status.all())
 
     def is_gameover(self):
         # Either someone wins or all grid occupied
@@ -357,13 +353,9 @@ class Tic_Tac_Toe():
         return False
 
     def is_tie(self):
-
-        r, c = np.where(self.board_status == 0)
-        tie = False
-        if len(r) == 0:
-            tie = True
-
-        return tie
+        # ⚡ BOLT: Replace slow np.where() with fast C-level .all() check for zeros
+        # board_status contains 1, -1, or 0. .all() is False if any 0s exist
+        return bool(self.board_status.all())
 
     def is_gameover(self):
         # Either someone wins or all grid occupied
