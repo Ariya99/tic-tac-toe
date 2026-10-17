@@ -1,0 +1,4 @@
+## 2026-10-17 - Fix Array Index Out of Bounds Vulnerability
+**Vulnerability:** In `is_grid_occupied`, the `logical_position` tuple parsed from user click events is used directly as array indices for `board_status` without any boundary checking. If a user clicks outside the valid canvas area, or an event triggers with out-of-bounds coordinates, `logical_position` contains values < 0 or >= 3, leading to an IndexError crash. This can be exploited to cause a Denial of Service (DoS) by crashing the application.
+**Learning:** Even internal coordinate transformations based on UI events can yield unexpected values. User input (clicks) should always be validated before being used to index into data structures.
+**Prevention:** Always validate array indices against array dimensions, especially when derived from external inputs like UI events.
