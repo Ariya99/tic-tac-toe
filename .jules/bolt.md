@@ -1,0 +1,3 @@
+## 2024-05-24 - Faster Empty Cell Checking in NumPy
+**Learning:** While native Python tuples are computationally faster than NumPy arrays for small 2D coordinate calculations, using `np.where()` or `np.any()` to check for empty cells (zeros) in a NumPy array constructs arrays of indices which adds unnecessary overhead. Using `.all()` performs a C-level boolean evaluation which is significantly faster.
+**Action:** When checking for empty cells (zeros) in NumPy arrays, prefer using `.all()` over `np.where()` or `np.any()` for significantly faster C-level boolean evaluation. Do not apply this to cold paths.
