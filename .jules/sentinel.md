@@ -1,0 +1,4 @@
+## 2024-05-24 - Prevent Out-of-Bounds Wrap Around in GUI click handling
+**Vulnerability:** Tkinter negative coordinate wrap-around arrays and Denial of Service indexing. Unvalidated click events translated to logical coordinates would cause DoS via Python IndexError or logically unintended structure corruption at the tail-end due to Python negative indexing.
+**Learning:** Python and NumPy arrays wrap around for negative indices rather than throwing exceptions, meaning mapping GUI (pixel) bounds trivially to indices requires rigorous `>= 0` and `< max_len` explicit boundary definitions, otherwise click handlers mapping external locations translate to internal structural mutations logically outside intended ranges.
+**Prevention:** Always validate coordinates when mapping UI interactions (Tkinter click events) to numpy array indices explicitly against array boundaries.
