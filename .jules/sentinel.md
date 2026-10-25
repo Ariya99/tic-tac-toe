@@ -1,0 +1,4 @@
+## 2024-05-15 - Unvalidated GUI Coordinates Mapping to Array Indices
+**Vulnerability:** GUI click coordinates were converted to logical positions and used directly as indices for the `board_status` numpy array without bound checking. An out-of-bounds click would result in mapping to negative indices (wrap-around logic in Python/NumPy) or `IndexError` on large values, leading to application crash (DoS) or unintended state corruption.
+**Learning:** Python and NumPy use negative indices for wrap-around access. Unvalidated mappings from graphical events to underlying array structures not only risk crash via out-of-bounds `IndexError`, but can also silently corrupt game state by overwriting completely unassociated indices at the end of structures.
+**Prevention:** Always validate that indices derived from user input or GUI mapping fall strictly within expected array boundaries (e.g. `0 <= index < size`) before accessing the array element.
