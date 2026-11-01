@@ -1,0 +1,4 @@
+## 2025-02-14 - Out-of-bounds Array Access via GUI Coordinates
+**Vulnerability:** GUI click coordinates are mapped to NumPy array indices without bounds validation. Unrestricted clicks outside the valid grid area result in out-of-bounds `logical_position` values. This causes a Denial of Service (application crash via `IndexError`) when clicking the bottom-right edges, and unintentional logical game state modification when clicking top/left bounds due to Python's negative index wrap-around.
+**Learning:** Raw input coordinates must never be trusted. Negative index wrap-around is a silent failure mode in Python arrays where out-of-bounds access logic leads to logical flaws instead of errors.
+**Prevention:** Always explicitly validate calculated array indices (e.g., `0 <= x < max_bound`) before using them to access or modify data structures, even when the input originates from within a constrained GUI window event.
