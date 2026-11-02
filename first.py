@@ -184,6 +184,13 @@ class Tic_Tac_Toe():
         grid_position = [event.x, event.y]
         logical_position = self.convert_grid_to_logical_position(grid_position)
 
+        # Security Fix: Prevent Out-of-Bounds/Denial of Service
+        # GUI coordinates must be validated against logical array boundaries
+        # before accessing the board_status numpy array. Negative values
+        # wrap around and large values throw IndexError causing application crash.
+        if not (0 <= logical_position[0] < 3 and 0 <= logical_position[1] < 3):
+            return
+
         if not self.reset_board:
             if self.player_X_turns:
                 if not self.is_grid_occupied(logical_position):
@@ -206,8 +213,10 @@ class Tic_Tac_Toe():
             self.reset_board = False
 
 
-game_instance = Tic_Tac_Toe()
-game_instance.mainloop()from tkinter import *
+if __name__ == '__main__':
+    game_instance = Tic_Tac_Toe()
+    game_instance.mainloop()
+from tkinter import *
 import numpy as np
 
 size_of_board = 600
