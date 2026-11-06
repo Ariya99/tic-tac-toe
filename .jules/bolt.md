@@ -1,0 +1,3 @@
+## 2024-11-06 - Optimize is_tie with numpy all()
+**Learning:** Checking for empty cells using `np.where(array == 0)` is slower because it needs to find and list all indices before evaluating. Using `array.all()` provides a much faster C-level boolean evaluation, as it immediately returns False on the first 0 element.
+**Action:** Use `.all()` over `np.where()` or `np.any()` when checking for empty cells (zeros) in NumPy arrays for significantly faster evaluation.

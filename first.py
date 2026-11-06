@@ -148,13 +148,9 @@ class Tic_Tac_Toe():
         return False
 
     def is_tie(self):
-
-        r, c = np.where(self.board_status == 0)
-        tie = False
-        if len(r) == 0:
-            tie = True
-
-        return tie
+        # Optimization: use numpy .all() for C-level boolean evaluation
+        # Returns True if all elements are non-zero (i.e. no empty cells)
+        return self.board_status.all()
 
     def is_gameover(self):
         # Either someone wins or all grid occupied
@@ -207,7 +203,7 @@ class Tic_Tac_Toe():
 
 
 game_instance = Tic_Tac_Toe()
-game_instance.mainloop()from tkinter import *
+game_instance.mainloop()
 import numpy as np
 
 size_of_board = 600
@@ -357,13 +353,9 @@ class Tic_Tac_Toe():
         return False
 
     def is_tie(self):
-
-        r, c = np.where(self.board_status == 0)
-        tie = False
-        if len(r) == 0:
-            tie = True
-
-        return tie
+        # Optimization: use numpy .all() for C-level boolean evaluation
+        # Returns True if all elements are non-zero (i.e. no empty cells)
+        return self.board_status.all()
 
     def is_gameover(self):
         # Either someone wins or all grid occupied
