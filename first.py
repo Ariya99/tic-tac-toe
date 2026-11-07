@@ -184,6 +184,10 @@ class Tic_Tac_Toe():
         grid_position = [event.x, event.y]
         logical_position = self.convert_grid_to_logical_position(grid_position)
 
+        # SECURITY: Validate logical bounds to prevent negative wrapping and IndexError DoS
+        if not (0 <= logical_position[0] < 3 and 0 <= logical_position[1] < 3):
+            return
+
         if not self.reset_board:
             if self.player_X_turns:
                 if not self.is_grid_occupied(logical_position):
@@ -207,7 +211,7 @@ class Tic_Tac_Toe():
 
 
 game_instance = Tic_Tac_Toe()
-game_instance.mainloop()from tkinter import *
+game_instance.mainloop()
 import numpy as np
 
 size_of_board = 600
@@ -392,6 +396,10 @@ class Tic_Tac_Toe():
     def click(self, event):
         grid_position = [event.x, event.y]
         logical_position = self.convert_grid_to_logical_position(grid_position)
+
+        # SECURITY: Validate logical bounds to prevent negative wrapping and IndexError DoS
+        if not (0 <= logical_position[0] < 3 and 0 <= logical_position[1] < 3):
+            return
 
         if not self.reset_board:
             if self.player_X_turns:
